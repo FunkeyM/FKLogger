@@ -34,12 +34,14 @@ It supports both Objective-C and Swift, providing easy-to-use logging functions 
 
   # 依赖
   s.dependency 'CocoaLumberjack/Swift', '~> 3.8'
+  s.dependency 'SSZipArchive', '~> 2.4'
 
   # 子模块（可选，便于按需引入）
   s.subspec 'Logger' do |logger|
     logger.source_files = 'FKLogger/FKLogger/Logger/**/*.{h,m,swift}'
     logger.public_header_files = 'FKLogger/FKLogger/Logger/FKLoggerHeader.h'
     logger.dependency 'CocoaLumberjack/Swift', '~> 3.8'
+    logger.dependency 'SSZipArchive', '~> 2.4'
   end
 
   s.subspec 'CrashManager' do |crash|
