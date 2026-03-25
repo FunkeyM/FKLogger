@@ -10,8 +10,6 @@
 
 #if __has_include("FKLogger-Swift.h")
 #import "FKLogger-Swift.h"
-#else
-@import FKLogger;
 #endif
 
 #define FKLogVerbose(fmt, ...) [[FKLoggerManager shared] verbose:[NSString stringWithFormat:fmt, ##__VA_ARGS__] file:[NSString stringWithUTF8String:__FILE__] function:[NSString stringWithUTF8String:__FUNCTION__] line:__LINE__]
