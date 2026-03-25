@@ -31,9 +31,10 @@ It supports both Objective-C and Swift, providing easy-to-use logging functions 
     'SWIFT_OBJC_BRIDGING_HEADER' => 'FKLogger/FKLogger/FKLogger-Bridging-Header.h'
   }
 
-  # 源文件
+  # 源文件 - 包含 Bridging Header
   s.source_files = 'FKLogger/FKLogger/Logger/**/*.{h,m,swift}',
-                    'FKLogger/FKLogger/CrashManager/**/*.{h,m,swift}'
+                    'FKLogger/FKLogger/CrashManager/**/*.{h,m,swift}',
+                    'FKLogger/FKLogger/FKLogger-Bridging-Header.h'
 
   # 公开头文件
   s.public_header_files = 'FKLogger/FKLogger/Logger/FKLoggerHeader.h',
@@ -45,10 +46,15 @@ It supports both Objective-C and Swift, providing easy-to-use logging functions 
 
   # 子模块 - Logger
   s.subspec 'Logger' do |logger|
-    logger.source_files = 'FKLogger/FKLogger/Logger/**/*.{h,m,swift}'
+    logger.source_files = 'FKLogger/FKLogger/Logger/**/*.{h,m,swift}',
+                          'FKLogger/FKLogger/FKLogger-Bridging-Header.h'
     logger.public_header_files = 'FKLogger/FKLogger/Logger/FKLoggerHeader.h'
     logger.dependency 'CocoaLumberjack/Swift', '~> 3.8'
     logger.dependency 'SSZipArchive', '~> 2.4'
+    logger.pod_target_xcconfig = {
+      'SWIFT_OBJC_INTERFACE_HEADER_NAME' => 'FKLogger-Swift.h',
+      'SWIFT_OBJC_BRIDGING_HEADER' => 'FKLogger/FKLogger/FKLogger-Bridging-Header.h'
+    }
   end
 
   # 子模块 - CrashManager
