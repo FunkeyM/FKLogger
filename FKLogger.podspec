@@ -23,6 +23,13 @@ It supports both Objective-C and Swift, providing easy-to-use logging functions 
   s.swift_version = '5.0'
 
   s.requires_arc = true
+  s.static_framework = true
+
+  # Framework 配置 - OC/Swift 混编
+  s.pod_target_xcconfig = {
+    'SWIFT_OBJC_INTERFACE_HEADER_NAME' => 'FKLogger-Swift.h',
+    'SWIFT_OBJC_BRIDGING_HEADER' => 'FKLogger/FKLogger/FKLogger-Bridging-Header.h'
+  }
 
   # 源文件
   s.source_files = 'FKLogger/FKLogger/Logger/**/*.{h,m,swift}',
@@ -36,7 +43,7 @@ It supports both Objective-C and Swift, providing easy-to-use logging functions 
   s.dependency 'CocoaLumberjack/Swift', '~> 3.8'
   s.dependency 'SSZipArchive', '~> 2.4'
 
-  # 子模块（可选，便于按需引入）
+  # 子模块 - Logger
   s.subspec 'Logger' do |logger|
     logger.source_files = 'FKLogger/FKLogger/Logger/**/*.{h,m,swift}'
     logger.public_header_files = 'FKLogger/FKLogger/Logger/FKLoggerHeader.h'
@@ -44,6 +51,7 @@ It supports both Objective-C and Swift, providing easy-to-use logging functions 
     logger.dependency 'SSZipArchive', '~> 2.4'
   end
 
+  # 子模块 - CrashManager
   s.subspec 'CrashManager' do |crash|
     crash.source_files = 'FKLogger/FKLogger/CrashManager/**/*.{h,m,swift}'
     crash.public_header_files = 'FKLogger/FKLogger/CrashManager/CrashManager.h'
